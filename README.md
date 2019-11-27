@@ -55,7 +55,7 @@ All Lutece images are available at https://hub.docker.com/u/lutece/
 
 'http://localhost/site-suggest-demo/jsp/admin/AdminMenu.jsp'
 
-Connect to the back office with login/pwd : admin/adminadmin
+Connect to the back office with login/pwd : admin/suggest
 
 ## Sources
 All Lutece sources are available  at :
