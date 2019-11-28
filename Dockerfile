@@ -28,6 +28,12 @@ RUN  /etc/init.d/mysql start && \
     /etc/init.d/mysql stop 
 
 COPY entrypoint.sh /entrypoint.sh
+
+ENV LUTECE_DB_NAME=lutece
+ENV LUTECE_DB_USER=admin
+ENV LUTECE_DB_PWD=motdepasse
+
+
 ENTRYPOINT ["sh", "/entrypoint.sh"]
 
 
