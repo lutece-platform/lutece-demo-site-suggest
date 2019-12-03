@@ -8,14 +8,13 @@
         <groupId>fr.paris.lutece.tools</groupId>
         <version>2.0.5</version>
     </parent>
-
     <modelVersion>4.0.0</modelVersion>
     <groupId>fr.paris.lutece</groupId>
     <artifactId>site-suggest-demo</artifactId>
     <packaging>lutece-site</packaging>
     <version>1.0.0-SNAPSHOT</version>
     <name>Suggest Demo site</name>
-
+	
     <repositories>
         <repository>
             <id>luteceSnapshot</id>
@@ -39,25 +38,25 @@
         <dependency>
             <groupId>fr.paris.lutece</groupId>
             <artifactId>lutece-core</artifactId>
-            <version>6.0.0-RC-01</version> 
+            <version>7.0.0-SNAPSHOT</version>
             <type>lutece-core</type>
         </dependency>
         <dependency>
             <groupId>fr.paris.lutece.plugins</groupId>
             <artifactId>plugin-html</artifactId>
-            <version>3.1.0</version>
+            <version>4.0.1</version>
             <type>lutece-plugin</type>
         </dependency>
         <dependency>
             <groupId>fr.paris.lutece.plugins</groupId>
             <artifactId>plugin-mylutece</artifactId>
-            <version>3.3.3</version>
+            <version>3.3.6</version>
             <type>lutece-plugin</type>
         </dependency>
         <dependency>
             <groupId>fr.paris.lutece.plugins</groupId>
             <artifactId>module-mylutece-database</artifactId>
-            <version>5.0.0</version>
+            <version>5.0.3</version>
             <type>lutece-plugin</type>
         </dependency>
         <dependency>
@@ -69,13 +68,13 @@
         <dependency>
             <groupId>fr.paris.lutece.plugins</groupId>
             <artifactId>plugin-subscribe</artifactId>
-            <version>1.0.1</version>
+            <version>1.0.3</version>
             <type>lutece-plugin</type>
         </dependency>
         <dependency>
             <groupId>fr.paris.lutece.plugins</groupId>
             <artifactId>plugin-suggest</artifactId>
-            <version>[3.0.0,)</version>
+            <version>[3.0.2-SNAPSHOT,)</version>
             <type>lutece-plugin</type>
         </dependency>
         <dependency>
@@ -90,12 +89,21 @@
             <version>4.1.1</version>
             <type>lutece-plugin</type>
         </dependency>
+ 		<dependency>
+            <artifactId>lutece-demo-graphic-charter</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+            <type>lutece-site</type>
+        </dependency>
     </dependencies>
+	<properties>
+        <lutece.plugin.version>4.0.2-SNAPSHOT</lutece.plugin.version>
+        <maven-lutece-plugin.version>4.0.2-SNAPSHOT</maven-lutece-plugin.version>
+    </properties>
 
     <properties>
         <jiraProjectName>SUGGESTDEM</jiraProjectName>
     </properties>
-    
+   
     <scm>
         <connection>scm:git:https://github.com/lutece-platform/lutece-demo-site-suggest.git</connection>
         <developerConnection>scm:git:https://github.com/lutece-platform/lutece-demo-site-suggest.git</developerConnection>
