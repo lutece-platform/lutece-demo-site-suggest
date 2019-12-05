@@ -1,0 +1,5 @@
+
+DELETE FROM `mylutece_database_user`;
+INSERT INTO `mylutece_database_user` (`mylutece_database_user_id`, `login`, `password`, `name_given`, `name_family`, `email`, `is_active`, `reset_password`, `password_max_valid_date`, `account_max_valid_date`, `nb_alerts_sent`, `last_login`) VALUES
+	(1, 'User1', 'PBKDF2WITHHMACSHA512:40000:1f5023eaff00b1e626c64f0db0e0dc2b:ab35776895a12b5e2d3380800b5345afd4ca7b72c8b1d6f78c038f00a0ba5c4e5bdd6f82c0f22a08175d061fd716ff347dbc347998b08c54cefcc1b643e78dbfc3e86bce992045e3fb3df4d82f0e5e00eb1d3d64312b14cf006e2766b7415bdab4ec3c188cfd34fb8a95967641099c961710dc7dbaaeb6843d19c29b28ee945d', 'User1', 'User1', 'choupinet75@yopmail.com', 1, 0, NULL, 1606581573760, 0, '2019-12-04 17:39:33'),
+	(2, 'User2', 'PBKDF2WITHHMACSHA512:40000:7504f063464c5bb7cf8f2c3b90e2b667:58ed41fe446e37c73c5100b8746328f6941f710211aef74260468bee6871f8716de536021f38e5d512a6ae9195c1bb67c0c036e5de94bb5a3c62f13314b577c8cc5f10babb5bf650d7feb626c5a69cdf958fee2f03d7a3077379b57ca3bd44b9ce22a75e3b8f831d637f0c43e7592aa9f4052a378ad4080a69b0f2ca0f14be03', 'Paul', 'Choupinet', 'laurent.hohl@gmail.com', 1, 0, NULL, 1606144319915, 0, '2019-11-29 16:11:59');
