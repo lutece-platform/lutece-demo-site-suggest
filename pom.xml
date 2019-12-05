@@ -90,17 +90,13 @@
             <type>lutece-plugin</type>
         </dependency>
  		<dependency>
-            <artifactId>lutece-demo-graphic-charter</artifactId>
+			<groupId>fr.paris.lutece.themes</groupId>
+            <artifactId>site-theme-lutece-demo</artifactId>
             <version>1.0.0-SNAPSHOT</version>
             <type>lutece-site</type>
         </dependency>
     </dependencies>
 	<properties>
-        <lutece.plugin.version>4.0.2-SNAPSHOT</lutece.plugin.version>
-        <maven-lutece-plugin.version>4.0.2-SNAPSHOT</maven-lutece-plugin.version>
-    </properties>
-
-    <properties>
         <jiraProjectName>SUGGESTDEM</jiraProjectName>
     </properties>
    
