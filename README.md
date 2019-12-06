@@ -57,8 +57,13 @@ All Lutece images are available at https://hub.docker.com/u/lutece/
 
 Connect to the back office with login/pwd : admin/suggest
 
+## Run the image from docker hub without building it locally
+
+`docker run -p 80:8080 lutece/suggest`
+
+
 ## Sources
 All Lutece sources are available  at :
 'https://github.com/lutece-platform'
 
-more information about Lut�ce framework : 'https://fr.lutece.paris.fr/fr/wiki/home.html'
+more information about Lutece framework : 'https://fr.lutece.paris.fr/fr/wiki/home.html'
