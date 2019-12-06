@@ -10,13 +10,13 @@ ARG site=site-suggest-demo-1.0.0-SNAPSHOT
 WORKDIR /app
 ADD pom.xml /app/pom.xml
 ADD dump.sql /app/dump.sql
-#ADD webapp /app/webapp
+ADD webapp /app/webapp
 RUN mvn lutece:site-assembly
 
 # change default user
 RUN  sed -i 's/root/admin/' /app/target/${site}/WEB-INF/conf/db.properties
 
-RUN mv /app/target/${site}/ /var/lib/tomcat8/webapps/site-suggest-demo
+RUN mv /app/target/${site}/ /var/lib/tomcat8/webapps/suggest
 
 # run the database initialization script
 RUN  /etc/init.d/mysql start && \

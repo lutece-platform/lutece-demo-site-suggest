@@ -48,12 +48,12 @@ All Lutece images are available at https://hub.docker.com/u/lutece/
 
 ## Connect to the server to see the service
 
-'http://localhost/site-suggest-demo'
+'http://localhost/suggest'
 
 
 ## Back office management
 
-'http://localhost/site-suggest-demo/jsp/admin/AdminMenu.jsp'
+'http://localhost/suggest/jsp/admin/AdminMenu.jsp'
 
 Connect to the back office with login/pwd : admin/suggest
 
@@ -61,4 +61,4 @@ Connect to the back office with login/pwd : admin/suggest
 All Lutece sources are available  at :
 'https://github.com/lutece-platform'
 
-more information about Lutèce framework : 'https://fr.lutece.paris.fr/fr/wiki/home.html'
+more information about Lutï¿½ce framework : 'https://fr.lutece.paris.fr/fr/wiki/home.html'
