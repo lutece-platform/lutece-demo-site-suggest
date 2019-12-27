@@ -1,3 +1,10 @@
+-- --------------------------------------------------------
+-- Host:                         127.0.0.1
+-- Server version:               10.0.20-MariaDB - mariadb.org binary distribution
+-- Server OS:                    Win64
+-- HeidiSQL Version:             9.1.0.4867
+-- --------------------------------------------------------
+
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET NAMES utf8mb4 */;
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
@@ -190,7 +197,7 @@ CREATE TABLE IF NOT EXISTS `core_admin_user` (
 -- Dumping data for table lutece.core_admin_user: 1 rows
 /*!40000 ALTER TABLE `core_admin_user` DISABLE KEYS */;
 INSERT INTO `core_admin_user` (`id_user`, `access_code`, `last_name`, `first_name`, `email`, `status`, `password`, `locale`, `level_user`, `reset_password`, `accessibility_mode`, `password_max_valid_date`, `account_max_valid_date`, `nb_alerts_sent`, `last_login`, `workgroup_key`) VALUES
-	(1, 'admin', 'Admin', 'admin', 'admin@lutece.fr', 0, 'PLAINTEXT:suggest', 'en', 0, 0, 0, '2020-01-01 00:00:00', NULL, 0, '1980-01-01 00:00:00', 'all');
+	(1, 'admin', 'Admin', 'admin', 'admin@lutece.fr', 0, 'PBKDF2WITHHMACSHA512:40000:84f82d20d11f15ca2faa84f1dc4581e2:a8c77da2179deab78051d78223025a8361fe0a60d5641cea61a230b6ed8a691eecc6843f4abf96708bd5677b366184ec31f58dc958a59acbc418be24acc9d4ced19638ab729f6de122c3d55ef9ddfb59d7c67f9a36ec1c3a6cc290b6e981056541b3093a509716902eefc95dfb8b98bed286f45fc2f94fcb49539f168b6e1c20', 'en', 0, 0, 0, '2020-01-01 00:00:00', 1609076171940, 0, '2019-12-27 14:36:11', 'all');
 /*!40000 ALTER TABLE `core_admin_user` ENABLE KEYS */;
 
 
@@ -432,7 +439,7 @@ INSERT INTO `core_datastore` (`entity_key`, `entity_value`) VALUES
 	('mylutece.security.public_url.mylutece-database.url.lostLogin.page', 'jsp/site/Portal.jsp?page=mylutecedatabase&action=lostLogin'),
 	('mylutece.security.public_url.mylutece-database.url.reinitPassword.page', 'jsp/site/Portal.jsp?page=mylutecedatabase&action=reinitPassword'),
 	('mylutece.security.public_url.mylutece-database.url.doActionsAll', 'jsp/site/plugins/mylutece/modules/database/Do*'),
-	('seo.rewrite.config.lastUpdate', 'Dernière mise à jour du fichier de configuration : 27 déc. 2019 à 12:06:04 Nombre d\'url : 7 Resultat : OK'),
+	('seo.rewrite.config.lastUpdate', 'Dernière mise à jour du fichier de configuration : 27 déc. 2019 à 15:06:04 Nombre d\'url : 7 Resultat : OK'),
 	('seo.config.uptodate', 'true'),
 	('seo.generator.option.addPath', 'false'),
 	('seo.generator.option.addHtmlSuffix', 'true'),
@@ -440,7 +447,7 @@ INSERT INTO `core_datastore` (`entity_key`, `entity_value`) VALUES
 	('seo.generator.daemon.enabled', 'true'),
 	('seo.canonicalUrls.enabled', 'true'),
 	('seo.sitmap.daemon.enabled', 'true'),
-	('seo.sitemap.update.log', 'Dernière génération : 27 déc. 2019 à 12:05:58 Nombre d\'url : 3 Resultat : OK'),
+	('seo.sitemap.update.log', 'Dernière génération : 27 déc. 2019 à 15:05:58 Nombre d\'url : 4 Resultat : OK'),
 	('core.cache.status.PortalMenuService.enabled', '1'),
 	('core.cache.status.PortletCacheService.enabled', '0'),
 	('core.cache.status.StaticFilesCachingFilter.timeToLiveSeconds', '604800'),
@@ -559,10 +566,16 @@ CREATE TABLE IF NOT EXISTS `core_indexer_action` (
   `indexer_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `id_portlet` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id_action`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Dumping data for table lutece.core_indexer_action: 0 rows
+-- Dumping data for table lutece.core_indexer_action: 5 rows
 /*!40000 ALTER TABLE `core_indexer_action` DISABLE KEYS */;
+INSERT INTO `core_indexer_action` (`id_action`, `id_document`, `id_task`, `indexer_name`, `id_portlet`) VALUES
+	(10, '6', 2, 'SuggestIndexer', -1),
+	(9, '7', 2, 'SuggestIndexer', -1),
+	(8, '9', 2, 'SuggestIndexer', -1),
+	(7, '9', 1, 'SuggestIndexer', -1),
+	(11, '8', 2, 'SuggestIndexer', -1);
 /*!40000 ALTER TABLE `core_indexer_action` ENABLE KEYS */;
 
 
@@ -1435,11 +1448,14 @@ CREATE TABLE IF NOT EXISTS `suggest_category` (
   PRIMARY KEY (`id_category`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Dumping data for table lutece.suggest_category: 2 rows
+-- Dumping data for table lutece.suggest_category: 5 rows
 /*!40000 ALTER TABLE `suggest_category` DISABLE KEYS */;
 INSERT INTO `suggest_category` (`id_category`, `title`, `color`) VALUES
 	(1, 'Theme 1', NULL),
-	(2, 'Theme 2', NULL);
+	(2, 'Theme 2', NULL),
+	(3, 'Energy', '#ffffbb'),
+	(4, 'Transportation', '#ffbbff'),
+	(5, 'Plastic use', '#bbffff');
 /*!40000 ALTER TABLE `suggest_category` ENABLE KEYS */;
 
 
@@ -1505,11 +1521,13 @@ CREATE TABLE IF NOT EXISTS `suggest_entry` (
   KEY `index_suggest_entry_type` (`id_type`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Dumping data for table lutece.suggest_entry: 2 rows
+-- Dumping data for table lutece.suggest_entry: 4 rows
 /*!40000 ALTER TABLE `suggest_entry` DISABLE KEYS */;
 INSERT INTO `suggest_entry` (`id_entry`, `id_suggest`, `id_type`, `title`, `help_message`, `entry_comment`, `mandatory`, `pos`, `default_value`, `height`, `width`, `max_size_enter`, `show_in_suggest_submit_list`) VALUES
 	(2, 1, 3, 'Description', '', '', 1, 2, '', 4, 80, 500, 1),
-	(1, 1, 2, 'Title', '', '', 1, 1, '', -1, 80, -1, 1);
+	(1, 1, 2, 'Title', '', '', 1, 1, '', -1, 80, -1, 1),
+	(3, 2, 2, 'Title', '', '', 1, 3, '', -1, 100, -1, 1),
+	(4, 2, 3, 'Description', '', '', 1, 4, '', 4, 100, 500, 1);
 /*!40000 ALTER TABLE `suggest_entry` ENABLE KEYS */;
 
 
@@ -1620,7 +1638,7 @@ CREATE TABLE IF NOT EXISTS `suggest_response` (
   KEY `index_suggest_response_suggest` (`id_suggest_submit`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Dumping data for table lutece.suggest_response: 8 rows
+-- Dumping data for table lutece.suggest_response: 16 rows
 /*!40000 ALTER TABLE `suggest_response` DISABLE KEYS */;
 INSERT INTO `suggest_response` (`id_response`, `id_suggest_submit`, `response_value`, `id_entry`, `id_resource_image`) VALUES
 	(1, 3, 'Hire Happy Personalities', 1, NULL),
@@ -1630,7 +1648,15 @@ INSERT INTO `suggest_response` (`id_response`, `id_suggest_submit`, `response_va
 	(5, 2, 'Avoid micromanagement', 1, NULL),
 	(6, 2, 'If employees feel like they are constantly on their boss’s radar, they are not going to perform the way they normally would, and they will begin to resent their job.\r\nIt doesn’t help anyone if half the day is spent recording and reporting what tasks were checked off and which ones weren’t, so, give the team the trust and creative freedom that they deserve by setting clear expectations and fair boundaries.', 2, NULL),
 	(7, 5, 'Manage Work/Life balance', 1, NULL),
-	(8, 5, 'Make it known that work/life balance is a priority by offering work-from-home Fridays, unlimited vacation days, discounts on surrounding health and wellness programs, or childcare options. Offering incentives that improve a team member’s overall quality of life show that the company cares about the wellbeing.', 2, NULL);
+	(8, 5, 'Make it known that work/life balance is a priority by offering work-from-home Fridays, unlimited vacation days, discounts on surrounding health and wellness programs, or childcare options. Offering incentives that improve a team member’s overall quality of life show that the company cares about the wellbeing.', 2, NULL),
+	(9, 6, 'Sustainable roofs', 3, NULL),
+	(10, 6, 'Rooftop gardens are even more effective because they bring the temperature down, provide shade, clean the air, and don’t just bounce sunlight back into the atmosphere, which could potentially disrupt precipitation patterns, and also retain heat in the wintertime, bringing heating bills down.', 4, NULL),
+	(11, 7, 'Banning plastic', 3, NULL),
+	(12, 7, 'The vast majority of this plastic isn’t recycled. It ends up in landfills, oceans, green spaces, and elsewhere, where it pollutes ecosystems, harms animals, and contaminates drinking water. For many governments around the world, this blanketing of the planet is a tipping point — the convenience of plastic no longer seems worth the environmental consequences.', 4, NULL),
+	(13, 8, 'Bicycle highways', 3, NULL),
+	(14, 8, 'The transportation sector is one of the largest sources of greenhouse gas emissions in the world, and cars and trucks make up a large part of that total. Cities feel the effects of vehicle emissions more acutely than the rest of the world — all the fumes lead to air pollution that significantly reduces quality of life.\r\nWhen it comes building serious bicycle highways, the Danes and the Dutch were the great pioneers. While the Danish supercykelstiers are concentrated in and around Copenhagen, the', 4, NULL),
+	(15, 9, 'Commuting with an electric bike', 3, NULL),
+	(16, 9, 'Research shows that e-bikes are 10 to 20 times more energy efficient than a car, and frankly, an e-bike is just plain fun to ride. Folding e-bikes like this one can give you a sweat-free, less stressful commute and get you out of your car, the fastest-growing contributor to greenhouse gases in our country', 4, NULL);
 /*!40000 ALTER TABLE `suggest_response` ENABLE KEYS */;
 
 
@@ -1699,10 +1725,11 @@ CREATE TABLE IF NOT EXISTS `suggest_suggest` (
   KEY `index_suggest_suggest` (`id_vote_type`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Dumping data for table lutece.suggest_suggest: 1 rows
+-- Dumping data for table lutece.suggest_suggest: 2 rows
 /*!40000 ALTER TABLE `suggest_suggest` DISABLE KEYS */;
 INSERT INTO `suggest_suggest` (`id_suggest`, `title`, `unavailability_message`, `workgroup`, `id_vote_type`, `number_vote_required`, `number_day_required`, `active_suggest_submit_authentification`, `active_vote_authentification`, `active_comment_authentification`, `disable_new_suggest_submit`, `authorized_comment`, `disable_new_comment`, `id_mailing_list_suggest_submit`, `active_captcha`, `active`, `date_creation`, `libelle_validate_button`, `active_suggest_proposition_state`, `libelle_contribution`, `number_suggest_submit_in_top_score`, `number_suggest_submit_in_top_comment`, `limit_number_vote`, `number_suggest_submit_caracters_shown`, `show_category_block`, `show_top_score_block`, `show_top_comment_block`, `active_suggest_submit_paginator`, `number_suggest_submit_per_page`, `role`, `enable_new_suggest_submit_mail`, `header`, `sort_field`, `sort_asc`, `code_theme`, `confirmation_message`, `active_editor_bbcode`, `default_suggest`, `id_default_sort`, `notification_new_comment_sender`, `notification_new_comment_title`, `notification_new_comment_body`, `notification_new_suggest_submit_sender`, `notification_new_suggest_submit_title`, `notification_new_suggest_submit_body`) VALUES
-	(1, 'Hapiness at work', '<p>This consultation is not available</p>', 'all', 1, -1, -1, 0, 0, 0, 0, 0, 0, -1, 0, 1, '2019-12-26 16:25:29', 'Post', 0, 'Hapiness at work', 10, 10, 0, 500, 1, 1, 1, 1, 20, NULL, 0, '', 0, 0, 'blue', '', 0, 0, -1, '', '<p>New comments have been posted</p>', '<p>&nbsp;</p>\r\n<p>Hello</p>\r\n<p><br /> ${comments?size} New comments have been added : <br /> &lt;#list comments as comment_submit&gt;</p>\r\n<p>&lt;#if comment_submit.isOfficialAnswer()&gt; <span class="badge badge-warning"> Official response </span> &nbsp; ${comment_submit.dateComment?string("dd/MM/yyyy HH:mm:ss")}</p>\r\n<p>&lt;#if comment_submit.value?length &gt; 100&gt; ${comment_submit.value?substring(0,100)} &lt;#else&gt; ${comment_submit.value} <a class="btn btn-small btn-primary" href="${base_url}/jsp/site/Portal.jsp?page=suggest&amp;id_suggest=${comment_submit.suggestSubmit.suggest.idSuggest}&amp;id_suggest_submit=${comment_submit.suggestSubmit.idSuggestSubmit}&amp;action=view_suggest_submit"> Read More </a> </p>', '', '<p>New contributions have been created</p>', '<p>&nbsp;</p>\r\n<p>Hello</p>\r\n<p><br /> ${suggestSubmits?size} New contributions have been added : <br /> &lt;#list suggestSubmits as suggestSubmit&gt;</p>\r\n<p>${suggestSubmit.suggestSubmitTitle}</p>\r\n<p><a class="btn btn-small btn-primary" href="${base_url}/jsp/site/Portal.jsp?page=suggest&amp;id_suggest=${suggestSubmit.suggest.idSuggest}&amp;id_suggest_submit=${suggestSubmit.idSuggestSubmit}&amp;action=view_suggest_submit"> Read More </a> </p>');
+	(1, 'Hapiness at work', '<p>This consultation is not available</p>', 'all', 1, -1, -1, 0, 0, 0, 0, 0, 0, -1, 0, 1, '2019-12-26 16:25:29', 'Post', 0, 'Hapiness at work', 10, 10, 0, 500, 1, 1, 1, 1, 20, NULL, 0, '', 0, 0, 'blue', '', 0, 0, -1, '', '<p>New comments have been posted</p>', '<p>&nbsp;</p>\r\n<p>Hello</p>\r\n<p><br /> ${comments?size} New comments have been added : <br /> &lt;#list comments as comment_submit&gt;</p>\r\n<p>&lt;#if comment_submit.isOfficialAnswer()&gt; <span class="badge badge-warning"> Official response </span> &nbsp; ${comment_submit.dateComment?string("dd/MM/yyyy HH:mm:ss")}</p>\r\n<p>&lt;#if comment_submit.value?length &gt; 100&gt; ${comment_submit.value?substring(0,100)} &lt;#else&gt; ${comment_submit.value} <a class="btn btn-small btn-primary" href="${base_url}/jsp/site/Portal.jsp?page=suggest&amp;id_suggest=${comment_submit.suggestSubmit.suggest.idSuggest}&amp;id_suggest_submit=${comment_submit.suggestSubmit.idSuggestSubmit}&amp;action=view_suggest_submit"> Read More </a> </p>', '', '<p>New contributions have been created</p>', '<p>&nbsp;</p>\r\n<p>Hello</p>\r\n<p><br /> ${suggestSubmits?size} New contributions have been added : <br /> &lt;#list suggestSubmits as suggestSubmit&gt;</p>\r\n<p>${suggestSubmit.suggestSubmitTitle}</p>\r\n<p><a class="btn btn-small btn-primary" href="${base_url}/jsp/site/Portal.jsp?page=suggest&amp;id_suggest=${suggestSubmit.suggest.idSuggest}&amp;id_suggest_submit=${suggestSubmit.idSuggestSubmit}&amp;action=view_suggest_submit"> Read More </a> </p>'),
+	(2, 'What can my city do about climate change?', '<p>The consultation is closed</p>', 'all', 1, -1, -1, 0, 0, 0, 0, 0, 0, -1, 0, 1, '2019-12-27 14:42:50', 'Send', 0, 'What can my city do about climate change?', 10, 10, 0, 500, 1, 1, 1, 1, 20, NULL, 0, '', 0, 0, 'blue', '', 0, 0, -1, '', '<p>New comments have been posted</p>', '<p>&nbsp;</p>\r\n<p>Hello</p>\r\n<p><br /> ${comments?size} New comments have been added : <br /> &lt;#list comments as comment_submit&gt;</p>\r\n<p>&lt;#if comment_submit.isOfficialAnswer()&gt; <span class="badge badge-warning"> Official response </span> &nbsp; ${comment_submit.dateComment?string("dd/MM/yyyy HH:mm:ss")}</p>\r\n<p>&lt;#if comment_submit.value?length &gt; 100&gt; ${comment_submit.value?substring(0,100)} &lt;#else&gt; ${comment_submit.value} <a class="btn btn-small btn-primary" href="${base_url}/jsp/site/Portal.jsp?page=suggest&amp;id_suggest=${comment_submit.suggestSubmit.suggest.idSuggest}&amp;id_suggest_submit=${comment_submit.suggestSubmit.idSuggestSubmit}&amp;action=view_suggest_submit"> Read More </a></p>', '', '<p>New contributions have been created</p>', '<p>&nbsp;</p>\r\n<p>Hello</p>\r\n<p><br /> ${suggestSubmits?size} New contributions have been added : <br /> &lt;#list suggestSubmits as suggestSubmit&gt;</p>\r\n<p>${suggestSubmit.suggestSubmitTitle}</p>\r\n<p><a class="btn btn-small btn-primary" href="${base_url}/jsp/site/Portal.jsp?page=suggest&amp;id_suggest=${suggestSubmit.suggest.idSuggest}&amp;id_suggest_submit=${suggestSubmit.idSuggestSubmit}&amp;action=view_suggest_submit"> Read More </a></p>');
 /*!40000 ALTER TABLE `suggest_suggest` ENABLE KEYS */;
 
 
@@ -1714,8 +1741,26 @@ CREATE TABLE IF NOT EXISTS `suggest_suggest_attribute` (
   PRIMARY KEY (`id_suggest`,`attribute_key`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Dumping data for table lutece.suggest_suggest_attribute: 0 rows
+-- Dumping data for table lutece.suggest_suggest_attribute: 17 rows
 /*!40000 ALTER TABLE `suggest_suggest_attribute` DISABLE KEYS */;
+INSERT INTO `suggest_suggest_attribute` (`id_suggest`, `attribute_key`, `attribute_value`) VALUES
+	(2, 'idImageResource', '-1'),
+	(2, 'disableVote', 'false'),
+	(2, 'notificationNewCommentBody', '<p>&nbsp;</p>\r\n<p>Hello</p>\r\n<p><br /> ${comments?size} New comments have been added : <br /> &lt;#list comments as comment_submit&gt;</p>\r\n<p>&lt;#if comment_submit.isOfficialAnswer()&gt; <span class="badge badge-warning"> Official response </span> &nbsp; ${comment_submit.dateComment?string("dd/MM/yyyy HH:mm:ss")}</p>\r\n<p>&lt;#if comment_submit.value?length &gt; 100&gt; ${comment_submit.value?substring(0,100)} &lt;#else&gt; ${comment_submit.value} <a class="btn btn-small btn-primary" href="${base_url}/jsp/site/Portal.jsp?page=suggest&amp;id_suggest=${comment_submit.suggestSubmit.suggest.idSuggest}&amp;id_suggest_submit=${comment_submit.suggestSubmit.idSuggestSubmit}&amp;action=view_suggest_submit"> Read More </a></p>'),
+	(2, 'termsOfUse', ''),
+	(2, 'enableMailNewReportedSubmit', 'false'),
+	(2, 'numberCharCommentDisplayInSuggestSubmitList', '30'),
+	(2, 'enableTermsOfUse', 'false'),
+	(2, 'notificationNewCommentTitle', '<p>New comments have been posted</p>'),
+	(2, 'notificationNewCommentSenderName', ''),
+	(2, 'numberCommentDisplayInSuggestSubmitList', '3'),
+	(2, 'enableMailNewCommentSubmit', 'false'),
+	(2, 'description', '<p>&nbsp;Climate change is a global phenomenon that largely impacts urban life. At the same time, cities are a key contributor to climate change, as urban activities are major sources of greenhouse gas emissions.</p>'),
+	(2, 'notificationNewSuggestSubmitTitle', '<p>New contributions have been created</p>'),
+	(2, 'notificationNewSuggestSubmitBody', '<p>&nbsp;</p>\r\n<p>Hello</p>\r\n<p><br /> ${suggestSubmits?size} New contributions have been added : <br /> &lt;#list suggestSubmits as suggestSubmit&gt;</p>\r\n<p>${suggestSubmit.suggestSubmitTitle}</p>\r\n<p><a class="btn btn-small btn-primary" href="${base_url}/jsp/site/Portal.jsp?page=suggest&amp;id_suggest=${suggestSubmit.suggest.idSuggest}&amp;id_suggest_submit=${suggestSubmit.idSuggestSubmit}&amp;action=view_suggest_submit"> Read More </a></p>'),
+	(2, 'displayCommentInSuggestSubmitList', 'false'),
+	(2, 'notificationNewSuggestSubmitSenderName', ''),
+	(2, 'enableReports', 'false');
 /*!40000 ALTER TABLE `suggest_suggest_attribute` ENABLE KEYS */;
 
 
@@ -1728,8 +1773,12 @@ CREATE TABLE IF NOT EXISTS `suggest_suggest_category` (
   KEY `index_suggest_suggest_category_category` (`id_category`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Dumping data for table lutece.suggest_suggest_category: 0 rows
+-- Dumping data for table lutece.suggest_suggest_category: 3 rows
 /*!40000 ALTER TABLE `suggest_suggest_category` DISABLE KEYS */;
+INSERT INTO `suggest_suggest_category` (`id_suggest`, `id_category`) VALUES
+	(2, 3),
+	(2, 4),
+	(2, 5);
 /*!40000 ALTER TABLE `suggest_suggest_category` ENABLE KEYS */;
 
 
@@ -1762,13 +1811,17 @@ CREATE TABLE IF NOT EXISTS `suggest_suggest_submit` (
   KEY `index_suggest_suggest_submit_category` (`id_category`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Dumping data for table lutece.suggest_suggest_submit: 4 rows
+-- Dumping data for table lutece.suggest_suggest_submit: 8 rows
 /*!40000 ALTER TABLE `suggest_suggest_submit` DISABLE KEYS */;
 INSERT INTO `suggest_suggest_submit` (`id_suggest_submit`, `id_suggest`, `id_state`, `user_login`, `date_response`, `vote_number`, `score_number`, `id_category`, `suggest_submit_value`, `suggest_submit_title`, `comment_enable_number`, `suggest_submit_value_show_in_the_list`, `reported`, `lutece_user_key`, `suggest_submit_list_order`, `suggest_submit_type`, `number_view`, `disable_vote`, `is_pinned`, `disable_comment`, `id_image_resource`, `comment_number`) VALUES
 	(3, 1, 3, NULL, '2019-12-26 16:42:45', 0, 0, 1, '<p class="lead">\nHire Happy Personalities\n</p>	\nA happy work environment attracts good people and in turn, promotes a culture of productivity and accountability – a stressful environment will most definitely destroy the company culture.\n', 'Hire Happy Personalities', 0, '<p class="lead">\nHire Happy Personalities\n</p>	\nA happy work environment attracts good people and in turn, promotes a culture of productivity and accountability – a stressful environment will most definitely destroy the company culture.\n', 0, NULL, 2, NULL, 0, 0, 0, 0, NULL, 0),
 	(4, 1, 3, NULL, '2019-12-26 16:44:24', 0, 0, 1, '<p class="lead">\nWellness Program\n</p>	\nA wellness program that allows people to set health goals, access tools (trackers and apps). It can reward them for completing healthy activities and improvement in health through an innovative app\n', 'Wellness Program', 0, '<p class="lead">\nWellness Program\n</p>	\nA wellness program that allows people to set health goals, access tools (trackers and apps). It can reward them for completing healthy activities and improvement in health through an innovative app\n', 0, NULL, 3, NULL, 0, 0, 0, 0, NULL, 0),
 	(2, 1, 3, NULL, '2019-12-26 16:34:24', 2, 2, 1, '<p class="lead">\nAvoid micromanagement\n</p>	\nIf employees feel like they are constantly on their boss’s radar, they are not going to perform the way they normally would, and they will begin to resent their job.\r\nIt doesn’t help anyone if half the day is spent recording and reporting what tasks were checked off and which ones weren’t, so, give the team the trust and creative freedom that they deserve by setting clear expectations and fair boundaries.\n', 'Avoid micromanagement', 0, '<p class="lead">\nAvoid micromanagement\n</p>	\nIf employees feel like they are constantly on their boss’s radar, they are not going to perform the way they normally would, and they will begin to resent their job.\r\nIt doesn’t help anyone if half the day is spent recording and reporting what tasks were checked off and which ones weren’t, so, give the team the trust and creative freedom that they deserve by setting clear expectations and fair boundaries.\n', 0, NULL, 1, NULL, 0, 0, 0, 0, NULL, 0),
-	(5, 1, 3, NULL, '2019-12-26 16:45:17', 1, 1, 1, '<p class="lead">\nManage Work/Life balance\n</p>	\nMake it known that work/life balance is a priority by offering work-from-home Fridays, unlimited vacation days, discounts on surrounding health and wellness programs, or childcare options. Offering incentives that improve a team member’s overall quality of life show that the company cares about the wellbeing.\n', 'Manage Work/Life balance', 0, '<p class="lead">\nManage Work/Life balance\n</p>	\nMake it known that work/life balance is a priority by offering work-from-home Fridays, unlimited vacation days, discounts on surrounding health and wellness programs, or childcare options. Offering incentives that improve a team member’s overall quality of life show that the company cares about the wellbeing.\n', 0, NULL, 4, NULL, 0, 0, 0, 0, NULL, 0);
+	(5, 1, 3, NULL, '2019-12-26 16:45:17', 1, 1, 1, '<p class="lead">\nManage Work/Life balance\n</p>	\nMake it known that work/life balance is a priority by offering work-from-home Fridays, unlimited vacation days, discounts on surrounding health and wellness programs, or childcare options. Offering incentives that improve a team member’s overall quality of life show that the company cares about the wellbeing.\n', 'Manage Work/Life balance', 0, '<p class="lead">\nManage Work/Life balance\n</p>	\nMake it known that work/life balance is a priority by offering work-from-home Fridays, unlimited vacation days, discounts on surrounding health and wellness programs, or childcare options. Offering incentives that improve a team member’s overall quality of life show that the company cares about the wellbeing.\n', 0, NULL, 4, NULL, 0, 0, 0, 0, NULL, 0),
+	(6, 2, 3, NULL, '2019-12-27 15:07:22', 1, 1, 3, '<p class="lead">\nSustainable roofs\n</p>	\nRooftop gardens are even more effective because they bring the temperature down, provide shade, clean the air, and don’t just bounce sunlight back into the atmosphere, which could potentially disrupt precipitation patterns, and also retain heat in the wintertime, bringing heating bills down.\n', 'Sustainable roofs', 0, '<p class="lead">\nSustainable roofs\n</p>	\nRooftop gardens are even more effective because they bring the temperature down, provide shade, clean the air, and don’t just bounce sunlight back into the atmosphere, which could potentially disrupt precipitation patterns, and also retain heat in the wintertime, bringing heating bills down.\n', 0, NULL, 1, NULL, 0, 0, 0, 0, NULL, 0),
+	(7, 2, 3, NULL, '2019-12-27 15:08:15', 1, 1, 5, '<p class="lead">\nBanning plastic\n</p>	\nThe vast majority of this plastic isn’t recycled. It ends up in landfills, oceans, green spaces, and elsewhere, where it pollutes ecosystems, harms animals, and contaminates drinking water. For many governments around the world, this blanketing of the planet is a tipping point — the convenience of plastic no longer seems worth the environmental consequences.\n', 'Banning plastic', 0, '<p class="lead">\nBanning plastic\n</p>	\nThe vast majority of this plastic isn’t recycled. It ends up in landfills, oceans, green spaces, and elsewhere, where it pollutes ecosystems, harms animals, and contaminates drinking water. For many governments around the world, this blanketing of the planet is a tipping point — the convenience of plastic no longer seems worth the environmental consequences.\n', 0, NULL, 2, NULL, 0, 0, 0, 0, NULL, 0),
+	(8, 2, 3, NULL, '2019-12-27 15:11:30', 1, 1, 4, '<p class="lead">\nBicycle highways\n</p>	\nThe transportation sector is one of the largest sources of greenhouse gas emissions in the world, and cars and trucks make up a large part of that total. Cities feel the effects of vehicle emissions more acutely than the rest of the world — all the fumes lead to air pollution that significantly reduces quality of life.\r\nWhen it comes building serious bicycle highways, the Danes and the Dutch were the great pioneers. While the Danish supercykelstiers are concentrated in and around Copenhagen, the\n', 'Bicycle highways', 0, '<p class="lead">\nBicycle highways\n</p>	\nThe transportation sector is one of the largest sources of greenhouse gas emissions in the world, and cars and trucks make up a large part of that total. Cities feel the effects of vehicle emissions more acutely than the rest of the world — all the fumes lead to air pollution that significantly reduces quality of life.\r\nWhen it comes building serious bicycle highways, the Danes and the Dutch were the great pioneers. While the Danish supercykelstiers are concentrated in and around...\n', 0, NULL, 3, NULL, 0, 0, 0, 0, NULL, 0),
+	(9, 2, 3, NULL, '2019-12-27 15:23:27', 0, 0, 4, '<p class="lead">\nCommuting with an electric bike\n</p>	\nResearch shows that e-bikes are 10 to 20 times more energy efficient than a car, and frankly, an e-bike is just plain fun to ride. Folding e-bikes like this one can give you a sweat-free, less stressful commute and get you out of your car, the fastest-growing contributor to greenhouse gases in our country\n', 'Commuting with an electric bike', 0, '<p class="lead">\nCommuting with an electric bike\n</p>	\nResearch shows that e-bikes are 10 to 20 times more energy efficient than a car, and frankly, an e-bike is just plain fun to ride. Folding e-bikes like this one can give you a sweat-free, less stressful commute and get you out of your car, the fastest-growing contributor to greenhouse gases in our country\n', 0, NULL, 4, NULL, 0, 0, 0, 0, NULL, 0);
 /*!40000 ALTER TABLE `suggest_suggest_submit` ENABLE KEYS */;
 
 
